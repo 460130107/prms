@@ -63,4 +63,7 @@
 	<!-- 声明式容器事务管理 ,transaction-manager指定事务管理器为transactionManager -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 	</tx:advice>
+	
+	<!-- 开启事务注解 -->
+	<tx:annotation-driven/>
 </beans>

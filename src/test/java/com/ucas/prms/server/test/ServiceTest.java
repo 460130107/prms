@@ -59,6 +59,18 @@ public class ServiceTest extends AbstractJUnit4SpringContextTests {
 	}
 	
 	@Test
+	public void testRoleGet(){
+		Role role = roleService.getById(1l);
+		System.out.println(role.getName());
+		for(User user:role.getUsers()){
+			System.out.println(user.getName());
+		}
+		for(Privilege privilege:role.getPrivileges()){
+			System.out.println(privilege.getName());
+		}
+	}
+	
+	@Test
 	public void testPrivilegeSave(){
 		Privilege privilege=new Privilege();
 		privilege.setName("人员管理");

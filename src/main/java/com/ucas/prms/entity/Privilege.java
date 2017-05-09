@@ -30,11 +30,11 @@ public class Privilege {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name="url")
-	private String url;
-	
 	@Column(name="name")
 	private String name;	//权限名称
+	
+	@Column(name="url")
+	private String url;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
@@ -49,6 +49,17 @@ public class Privilege {
 	
 	@OneToMany(targetEntity=Privilege.class,cascade=CascadeType.ALL,mappedBy="parent")
 	private Set<Privilege> children = new HashSet<Privilege>();	//下级权限
+
+	public Privilege(){		
+	}
+	
+	public Privilege(String name, String url, Privilege parent) {
+		this.name = name;
+		this.url = url;
+		this.parent = parent;
+	}
+
+
 
 	public Long getId() {
 		return id;

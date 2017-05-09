@@ -13,21 +13,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * @Description:文章实体
+ * @Description:评论实体
  * @author:Chen Peng
- * @time:2017年5月9日 下午7:18:04
+ * @time:2017年5月9日 下午7:18:25
  */
 @Entity
-@Table(name = "articles")
-public class Article {
-
+@Table(name="replies")
+public class Reply {
+	
 	@Id
-	@Column(name = "article_id")
+	@Column(name = "reply_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@Column(name="title")
-	private String title;
 
 	@Column(name="content")
 	private String content;
@@ -39,20 +36,16 @@ public class Article {
 	@Column(name="post_time")
 	private Date postTime;
 
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="article_id")
+	private Article article;
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getContent() {
@@ -79,5 +72,12 @@ public class Article {
 		this.postTime = postTime;
 	}
 
-	
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
 }
