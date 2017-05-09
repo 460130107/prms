@@ -1,6 +1,7 @@
 package com.ucas.prms.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -29,7 +31,8 @@ public class Article {
 	@Column(name="title")
 	private String title;
 
-	@Column(name="content")
+	@Lob
+	@Column(name="content", columnDefinition="TEXT")
 	private String content;
 
 	@ManyToOne(cascade=CascadeType.ALL)

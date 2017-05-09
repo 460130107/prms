@@ -1,5 +1,8 @@
 package com.ucas.prms.server.test;
 
+
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +14,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ucas.prms.entity.Article;
 import com.ucas.prms.entity.Privilege;
+import com.ucas.prms.entity.Reply;
 import com.ucas.prms.entity.Role;
 import com.ucas.prms.entity.User;
+import com.ucas.prms.service.ArticleService;
 import com.ucas.prms.service.PrivilegeService;
+import com.ucas.prms.service.ReplyService;
 import com.ucas.prms.service.RoleService;
 import com.ucas.prms.service.UserService;
 
@@ -33,6 +40,12 @@ public class ServiceTest extends AbstractJUnit4SpringContextTests {
 	
 	@Autowired
 	private PrivilegeService privilegeService;
+	
+	@Autowired
+	private ArticleService articleService;
+	
+	@Autowired
+	private ReplyService replyService;
 	
 	@Test
 	public void testSaveUser(){
@@ -75,5 +88,27 @@ public class ServiceTest extends AbstractJUnit4SpringContextTests {
 		Privilege privilege=new Privilege();
 		privilege.setName("人员管理");
 		privilegeService.save(privilege);
+	}
+	
+	@Test
+	public void testArticleSave(){
+		Article article=new Article();
+		User author=userService.getById(1l);
+		article.setTitle("中国科学院大学的历史");
+		article.setContent("中国科学院大学成立于2012年。");
+		article.setAuthor(author);
+		article.setPostTime(new Date());
+		articleService.save(article);
+	}
+	
+	@Test
+	public void testReplySave(){
+		Reply reply=new Reply();
+		User author = userService.getById(2l);
+		reply.setContent("哇！这真是一所超棒的大学！");
+		reply.setAuthor(author);
+		reply.setArticle(articleService.getById(1l));
+		reply.setPostTime(new Date());
+		replyService.save(reply);
 	}
 }

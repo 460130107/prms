@@ -1,6 +1,7 @@
 package com.ucas.prms.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,7 +28,8 @@ public class Reply {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name="content")
+	@Lob
+	@Column(name="content", columnDefinition="TEXT")
 	private String content;
 
 	@ManyToOne(cascade=CascadeType.ALL)
